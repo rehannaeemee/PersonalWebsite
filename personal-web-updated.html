@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Academic website of Rehan Naeem — computer architecture, digital systems, VLSI, AI/ML accelerators, and hardware-software co-design.">
+  <title>Rehan Naeem | Academic Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070913;
+      --bg2:#0b0f1d;
+      --surface:rgba(14,18,33,.76);
+      --surface-solid:#101525;
+      --surface-2:#151b30;
+      --text:#f8fafc;
+      --muted:#9aa6bb;
+      --muted-2:#718096;
+      --border:rgba(148,163,184,.16);
+      --border-strong:rgba(148,163,184,.25);
+      --violet:#8b5cf6;
+      --violet2:#a78bfa;
+      --indigo:#6366f1;
+      --cyan:#22d3ee;
+      --cyan2:#67e8f9;
+      --green:#34d399;
+      --max:1180px;
+      --radius:22px;
+      --shadow:0 24px 80px rgba(0,0,0,.32);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      margin:0;
+      min-width:320px;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 0%,rgba(99,102,241,.20),transparent 28%),
+        radial-gradient(circle at 92% 14%,rgba(34,211,238,.10),transparent 26%),
+        radial-gradient(circle at 70% 65%,rgba(139,92,246,.08),transparent 24%),
+        var(--bg);
+      font-family:"Inter",system-ui,sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      background-image:
+        linear-gradient(rgba(148,163,184,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(148,163,184,.035) 1px,transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent 82%);
+    }
+
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 40px),var(--max));margin:auto}
+
+    /* ---------- NAV ---------- */
+    .topbar{
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:50;
+      padding:14px 0;
+    }
+    .nav-shell{
+      min-height:58px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      padding:0 18px;
+      background:rgba(8,11,22,.72);
+      border:1px solid var(--border);
+      border-radius:18px;
+      backdrop-filter:blur(18px);
+      box-shadow:0 8px 40px rgba(0,0,0,.22);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      font-family:"Space Grotesk",sans-serif;
+      font-weight:700;
+      letter-spacing:-.03em;
+    }
+    .brand-mark{
+      width:31px;height:31px;
+      display:grid;place-items:center;
+      border-radius:10px;
+      background:
+        linear-gradient(135deg,rgba(139,92,246,.95),rgba(34,211,238,.92));
+      box-shadow:0 0 28px rgba(139,92,246,.28);
+      font-family:"JetBrains Mono",monospace;
+      font-size:13px;
+      color:#fff;
+    }
+    .brand span:last-child{font-size:16px}
+    .desktop-nav{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:#cbd5e1;
+      font-size:13px;
+      font-weight:500;
+    }
+    .desktop-nav a{
+      position:relative;
+      transition:color .2s ease;
+    }
+    .desktop-nav a::after{
+      content:"";
+      position:absolute;
+      left:0;right:100%;
+      bottom:-7px;
+      height:1px;
+      background:linear-gradient(90deg,var(--violet2),var(--cyan));
+      transition:right .22s ease;
+    }
+    .desktop-nav a:hover{color:#fff}
+    .desktop-nav a:hover::after{right:0}
+    .nav-actions{display:flex;gap:9px;align-items:center}
+    .nav-link-btn,.btn{
+      min-height:38px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:0 15px;
+      border-radius:11px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.035);
+      color:#e2e8f0;
+      font-size:12px;
+      font-weight:600;
+      transition:transform .2s ease,border-color .2s ease,background .2s ease;
+    }
+    .nav-link-btn:hover,.btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(167,139,250,.5);
+      background:rgba(139,92,246,.09);
+    }
+    .btn.primary{
+      border-color:rgba(139,92,246,.52);
+      background:linear-gradient(135deg,var(--violet),var(--indigo));
+      color:#fff;
+      box-shadow:0 10px 28px rgba(99,102,241,.22);
+    }
+    .menu-btn{
+      display:none;
+      width:42px;height:42px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:rgba(255,255,255,.035);
+      cursor:pointer;
+    }
+    .menu-btn span{
+      display:block;
+      width:18px;height:2px;
+      margin:4px auto;
+      background:#fff;
+      transition:.25s;
+    }
+    .menu-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+    .menu-btn.open span:nth-child(2){opacity:0}
+    .menu-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+    .mobile-nav{
+      display:none;
+      position:fixed;
+      top:84px;left:20px;right:20px;
+      z-index:49;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:rgba(8,11,22,.96);
+      backdrop-filter:blur(20px);
+      box-shadow:var(--shadow);
+    }
+    .mobile-nav.open{display:block}
+    .mobile-nav a{
+      display:flex;
+      padding:13px 12px;
+      border-radius:10px;
+      color:#dbe3ef;
+      font-size:15px;
+    }
+    .mobile-nav a:hover{background:rgba(139,92,246,.09);color:#fff}
+
+    /* ---------- HERO ---------- */
+    .hero{
+      min-height:100vh;
+      padding:145px 0 90px;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:650px;height:650px;
+      border-radius:50%;
+      right:-240px;top:60px;
+      background:radial-gradient(circle,rgba(99,102,241,.18),rgba(139,92,246,.06) 44%,transparent 70%);
+      filter:blur(10px);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:68px;
+      align-items:center;
+    }
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:8px 12px;
+      border:1px solid rgba(52,211,153,.18);
+      border-radius:999px;
+      background:rgba(52,211,153,.055);
+      color:#c8f8e7;
+      font-size:12px;
+      margin-bottom:24px;
+    }
+    .status-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 14px rgba(52,211,153,.6);
+    }
+    h1,h2,h3{font-family:"Space Grotesk",sans-serif}
+    .hero h1{
+      margin:0;
+      max-width:760px;
+      font-size:clamp(55px,7.8vw,102px);
+      line-height:.91;
+      letter-spacing:-.065em;
+      font-weight:700;
+    }
+    .gradient-text{
+      background:linear-gradient(90deg,#fff 0%,#c4b5fd 42%,#67e8f9 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero-role{
+      margin:26px 0 0;
+      max-width:700px;
+      color:#c5cfdd;
+      font-size:18px;
+      line-height:1.55;
+    }
+    .hero-role strong{color:#fff;font-weight:600}
+    .hero-desc{
+      max-width:710px;
+      margin:22px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.72;
+    }
+    .hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
+    .hero-actions .btn{min-height:45px;padding:0 18px;font-size:13px}
+    .profile-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-top:24px;
+      color:#9aa6bb;
+      font-size:12px;
+      font-family:"JetBrains Mono",monospace;
+    }
+    .profile-links a:hover{color:var(--cyan2)}
+
+    /* ---------- SECTIONS ---------- */
+    .section{padding:104px 0;position:relative}
+    .section + .section{border-top:1px solid rgba(148,163,184,.07)}
+    .section-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:16px;
+      font:600 11px "JetBrains Mono",monospace;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--cyan2);
+    }
+    .section-label::before{
+      content:"";
+      width:22px;height:1px;
+      background:linear-gradient(90deg,var(--violet),var(--cyan));
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:30px;
+      margin-bottom:42px;
+    }
+    .section-head h2{
+      margin:0;
+      max-width:760px;
+      font-size:clamp(38px,5.6vw,68px);
+      line-height:1;
+      letter-spacing:-.055em;
+      font-weight:700;
+    }
+    .section-head p{
+      max-width:430px;
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* Bento research */
+    .bento{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
+    }
+    .card{
+      position:relative;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.025),transparent 48%),
+        var(--surface);
+      backdrop-filter:blur(12px);
+      overflow:hidden;
+      box-shadow:0 16px 60px rgba(0,0,0,.15);
+      transition:transform .25s ease,border-color .25s ease,background .25s ease;
+    }
+    .card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(167,139,250,.34);
+      background:
+        linear-gradient(145deg,rgba(139,92,246,.06),rgba(34,211,238,.02) 55%),
+        rgba(14,18,33,.86);
+    }
+    .research-card{padding:27px;min-height:290px}
+    .research-card.large{grid-column:span 7}
+    .research-card.small{grid-column:span 5}
+    .research-card.half{grid-column:span 6}
+    .mini-index{
+      width:34px;height:34px;
+      display:grid;place-items:center;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:rgba(255,255,255,.025);
+      color:#a5b4fc;
+      font:500 10px "JetBrains Mono",monospace;
+    }
+    .research-card h3{
+      margin:46px 0 12px;
+      font-size:28px;
+      letter-spacing:-.035em;
+      font-weight:600;
+    }
+    .research-card p{
+      margin:0;
+      max-width:640px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:23px}
+    .tag{
+      padding:6px 9px;
+      border:1px solid rgba(148,163,184,.12);
+      border-radius:8px;
+      background:rgba(255,255,255,.02);
+      color:#98a7ba;
+      font:500 10px "JetBrains Mono",monospace;
+    }
+    .orb{
+      position:absolute;
+      width:180px;height:180px;
+      border-radius:50%;
+      right:-80px;top:-80px;
+      background:radial-gradient(circle,rgba(139,92,246,.20),transparent 68%);
+      pointer-events:none;
+    }
+    .research-card.small .orb{background:radial-gradient(circle,rgba(34,211,238,.16),transparent 68%)}
+
+    /* HICOAR band */
+    .lab-card{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:30px;
+      align-items:center;
+      padding:28px 30px;
+      border:1px solid rgba(139,92,246,.24);
+      border-radius:20px;
+      background:
+        linear-gradient(105deg,rgba(139,92,246,.12),rgba(34,211,238,.045) 70%,rgba(255,255,255,.02));
+    }
+    .lab-card h3{margin:0 0 6px;font-size:23px}
+    .lab-card p{margin:0;color:var(--muted);font-size:13px;max-width:760px}
+
+    /* Publications */
+    .publication-list{display:grid;gap:12px}
+    .publication{
+      display:grid;
+      grid-template-columns:76px minmax(0,1fr) auto;
+      gap:18px;
+      align-items:start;
+      padding:21px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(14,18,33,.55);
+      transition:border-color .2s ease,background .2s ease;
+    }
+    .publication:hover{
+      border-color:rgba(34,211,238,.24);
+      background:rgba(17,24,39,.74);
+    }
+    .pub-year{
+      color:#a5b4fc;
+      font:600 12px "JetBrains Mono",monospace;
+    }
+    .pub-venue{
+      margin:0 0 5px;
+      color:#67e8f9;
+      font:500 10px "JetBrains Mono",monospace;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .publication h3{
+      margin:0;
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:-.025em;
+    }
+    .pub-authors{margin:7px 0 0;color:var(--muted);font-size:12px}
+    .pub-links{display:flex;gap:7px;flex-wrap:wrap}
+    .pub-links a{
+      padding:5px 8px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      color:#cbd5e1;
+      font:500 10px "JetBrains Mono",monospace;
+    }
+
+    /* Teaching */
+    .course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .course-card{padding:24px;min-height:250px}
+    .course-code{
+      display:inline-flex;
+      padding:6px 8px;
+      border-radius:7px;
+      background:rgba(99,102,241,.10);
+      color:#c4b5fd;
+      font:600 10px "JetBrains Mono",monospace;
+    }
+    .course-card h3{margin:38px 0 9px;font-size:22px;letter-spacing:-.035em}
+    .course-card p{margin:0;color:var(--muted);font-size:13px}
+    .course-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .course-links a{color:#a5b4fc;font-size:12px}
+    .course-links a:hover{color:#67e8f9}
+
+    /* Students */
+    .people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .people-card{padding:23px}
+    .people-card h3{margin:0 0 16px;font-size:19px}
+    .people-list{list-style:none;padding:0;margin:0}
+    .people-list li{
+      padding:12px 0;
+      border-top:1px solid rgba(148,163,184,.09);
+    }
+    .people-list span{display:block;font-size:13px}
+    .people-list small{display:block;margin-top:2px;color:var(--muted-2);font-size:11px}
+    .opportunity{
+      margin-top:16px;
+      padding:28px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:30px;
+      border:1px solid rgba(34,211,238,.17);
+      border-radius:20px;
+      background:
+        radial-gradient(circle at 90% 0%,rgba(34,211,238,.09),transparent 32%),
+        linear-gradient(110deg,rgba(139,92,246,.10),rgba(14,18,33,.8));
+    }
+    .opportunity h3{margin:0 0 7px;font-size:24px}
+    .opportunity p{margin:0;max-width:820px;color:var(--muted);font-size:13px}
+
+    /* Service & News */
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .service-card{padding:24px;min-height:190px}
+    .iconbox{
+      width:38px;height:38px;
+      display:grid;place-items:center;
+      border-radius:11px;
+      background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(34,211,238,.08));
+      border:1px solid rgba(139,92,246,.18);
+      color:#c4b5fd;
+      font:500 12px "JetBrains Mono",monospace;
+    }
+    .service-card h3{margin:30px 0 8px;font-size:20px}
+    .service-card p{margin:0;color:var(--muted);font-size:13px}
+
+    .news-list{display:grid;gap:12px}
+    .news{
+      display:grid;
+      grid-template-columns:110px minmax(0,1fr);
+      gap:18px;
+      padding:20px 21px;
+      border:1px solid var(--border);
+      border-radius:15px;
+      background:rgba(14,18,33,.45);
+    }
+    .news time{color:#a5b4fc;font:500 11px "JetBrains Mono",monospace}
+    .news h3{margin:0 0 5px;font-size:17px}
+    .news p{margin:0;color:var(--muted);font-size:12px}
+
+    /* Contact */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);
+      gap:18px;
+    }
+    .contact-main{padding:30px}
+    .contact-main h3{margin:0;font-size:32px}
+    .contact-main p{max-width:620px;color:var(--muted);font-size:14px}
+    .contact-mail{
+      display:inline-flex;
+      margin-top:10px;
+      font:600 13px "JetBrains Mono",monospace;
+      color:#67e8f9;
+    }
+    .profiles-card{padding:26px}
+    .profiles-card h3{margin:0 0 14px;font-size:18px}
+    .profile-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:11px 0;
+      border-top:1px solid rgba(148,163,184,.09);
+      color:#b8c2d0;
+      font-size:12px;
+    }
+    .profile-row span:last-child{color:#64748b;font-family:"JetBrains Mono",monospace}
+
+    /* Footer */
+    footer{padding:30px 0 42px;color:#64748b;font-size:11px}
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:30px;
+      align-items:center;
+      font-family:"JetBrains Mono",monospace;
+    }
+
+    /* Motion */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:960px){
+      .desktop-nav{display:none}
+      .hero-grid{grid-template-columns:1fr}
+      .course-grid,.people-grid,.service-grid{grid-template-columns:1fr 1fr}
+      .research-card.large,.research-card.small,.research-card.half{grid-column:span 6}
+      .section-head{align-items:flex-start;flex-direction:column}
+      .section-head p{max-width:680px}
+    }
+
+    @media(max-width:760px){
+      .container{width:calc(100% - 28px)}
+      .topbar{padding:10px 0}
+      .nav-shell{min-height:56px;padding:0 12px}
+      .brand span:last-child{font-size:14px}
+      .nav-actions .nav-link-btn{display:none}
+      .menu-btn{display:block}
+      .hero{padding:115px 0 70px}
+      .hero h1{font-size:clamp(50px,15vw,76px)}
+      .hero-role{font-size:16px}
+      .section{padding:78px 0}
+      .section-head h2{font-size:clamp(38px,12vw,56px)}
+      .research-card.large,.research-card.small,.research-card.half{grid-column:span 12}
+      .course-grid,.people-grid,.service-grid{grid-template-columns:1fr}
+      .publication{grid-template-columns:1fr;gap:8px}
+      .pub-links{margin-top:5px}
+      .lab-card,.opportunity{grid-template-columns:1fr}
+      .contact-wrap{grid-template-columns:1fr}
+      .news{grid-template-columns:1fr;gap:7px}
+      .footer-inner{align-items:flex-start;flex-direction:column}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1;transform:none;transition:none}
+      *{animation:none!important}
+    }
+
+    .resource-accessibility{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Student resources — follows the original dark gradient theme. */
+    #for-students{scroll-margin-top:95px}
+    .student-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .student-resource-card{display:grid;grid-template-columns:38px minmax(0,1fr) 20px;gap:18px;align-items:center;padding:25px;min-height:106px}
+    .resource-content{min-width:0}
+    .student-resource-card .resource-description{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+    .student-resource-card h3{margin:0;font-size:18px;font-weight:500;line-height:1.45;letter-spacing:-.025em}
+    .student-resource-card .resource-arrow{color:var(--cyan2);font-size:22px;justify-self:end}
+    .student-resource-card:focus-visible{outline:2px solid var(--cyan2);outline-offset:4px}
+    .student-resource-category{margin:0 0 20px;color:var(--violet2);font:500 12px "JetBrains Mono",monospace}
+    @media(max-width:1100px){.desktop-nav{display:none}.menu-btn{display:block}}
+    @media(max-width:760px){
+      .student-resource-grid{grid-template-columns:1fr}
+      .student-resource-card{padding:22px;gap:13px;grid-template-columns:34px minmax(0,1fr) 18px}
+      .student-resource-card h3{font-size:16px}
+    }
+
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav-shell">
+      <a class="brand" href="#home">
+        <span class="brand-mark">RN</span>
+        <span>Rehan Naeem</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#students">Students</a>
+        <a href="#for-students">For Students</a>
+        <a href="#service">Service</a>
+        <a href="#news">News</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="nav-link-btn" href="#contact">Contact</a>
+        <a class="nav-link-btn" href="cv.pdf">CV ↗</a>
+        <button id="menu-btn" class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav" class="mobile-nav">
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#students">Students</a>
+    <a href="#for-students">For Students</a>
+    <a href="#service">Service</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="cv.pdf">CV</a>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            Academic researcher · UET Lahore
+          </div>
+
+          <h1>
+            Rehan<br>
+            <span class="gradient-text">Naeem.</span>
+          </h1>
+
+          <p class="hero-role">
+            Faculty Member, <strong>Department of Electrical Engineering</strong><br>
+            University of Engineering and Technology, Lahore
+          </p>
+
+          <p class="hero-desc">
+            My research focuses on computer architecture and digital systems, with interests in
+            processor microarchitecture, AI/ML accelerators, VLSI systems, physical design,
+            and hardware–software co-design.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#research">Explore research →</a>
+            <a class="btn" href="#publications">Publications</a>
+            <a class="btn" href="cv.pdf">Download CV</a>
+          </div>
+
+          <div class="profile-links">
+            <a href="#">[Google Scholar]</a>
+            <a href="#">[ORCID]</a>
+            <a href="#">[GitHub]</a>
+            <a href="#">[LinkedIn]</a>
+            <a href="#">[HICOAR Lab]</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Research</div>
+            <h2>From architecture<br>to silicon.</h2>
+          </div>
+          <p>
+            Research at the intersection of processors, specialized hardware, digital design,
+            and physical implementation.
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="card research-card large reveal">
+            <span class="orb"></span>
+            <div>
+              <span class="mini-index">01</span>
+              <h3>Computer Architecture</h3>
+              <p>
+                Processor microarchitecture, memory systems, performance analysis,
+                and efficient computing architectures.
+              </p>
+              <div class="tags">
+                <span class="tag">Microarchitecture</span>
+                <span class="tag">RISC-V</span>
+                <span class="tag">Memory Systems</span>
+                <span class="tag">Performance</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card research-card small reveal">
+            <span class="orb"></span>
+            <div>
+              <span class="mini-index">02</span>
+              <h3>AI / ML Accelerators</h3>
+              <p>
+                Domain-specific computing, sparse computation, efficient data movement,
+                and accelerator architecture.
+              </p>
+              <div class="tags">
+                <span class="tag">Sparse Compute</span>
+                <span class="tag">ML Hardware</span>
+                <span class="tag">Accelerators</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card research-card half reveal">
+            <span class="orb"></span>
+            <div>
+              <span class="mini-index">03</span>
+              <h3>VLSI & Physical Design</h3>
+              <p>
+                RTL-to-GDS implementation, floorplanning, placement, routing,
+                timing closure, and design methodology.
+              </p>
+              <div class="tags">
+                <span class="tag">RTL-to-GDS</span>
+                <span class="tag">Timing</span>
+                <span class="tag">P&amp;R</span>
+                <span class="tag">Digital VLSI</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card research-card half reveal">
+            <span class="orb"></span>
+            <div>
+              <span class="mini-index">04</span>
+              <h3>Hardware–Software Co-design</h3>
+              <p>
+                Joint optimization of workload behavior, architectural choices,
+                and hardware implementation.
+              </p>
+              <div class="tags">
+                <span class="tag">Co-design</span>
+                <span class="tag">Digital Systems</span>
+                <span class="tag">Workload-aware</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lab-card reveal">
+          <div>
+            <h3>HICOAR Lab</h3>
+            <p>
+              Ibn Ul Haitham Computer Architecture Research Lab — research projects,
+              student training, events, and group activities.
+            </p>
+          </div>
+          <a class="btn primary" href="#">Visit HICOAR →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Publications</div>
+            <h2>Selected work.</h2>
+          </div>
+          <p>
+            Replace the placeholders below with actual papers. The design keeps titles,
+            authors, venues, and resources easy to scan.
+          </p>
+        </div>
+
+        <div class="publication-list">
+          <article class="publication reveal">
+            <div class="pub-year">2026</div>
+            <div>
+              <p class="pub-venue">Conference / Journal</p>
+              <h3>Publication title goes here</h3>
+              <p class="pub-authors">Author One, <strong>Rehan Naeem</strong>, Author Three</p>
+            </div>
+            <div class="pub-links"><a href="#">PDF</a><a href="#">DOI</a><a href="#">Code</a></div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="pub-year">2025</div>
+            <div>
+              <p class="pub-venue">Conference / Journal</p>
+              <h3>Publication title goes here</h3>
+              <p class="pub-authors"><strong>Rehan Naeem</strong>, Collaborator One, Collaborator Two</p>
+            </div>
+            <div class="pub-links"><a href="#">PDF</a><a href="#">Project</a></div>
+          </article>
+
+          <article class="publication reveal">
+            <div class="pub-year">2025</div>
+            <div>
+              <p class="pub-venue">Workshop / Preprint</p>
+              <h3>Publication title goes here</h3>
+              <p class="pub-authors">Student Name, <strong>Rehan Naeem</strong></p>
+            </div>
+            <div class="pub-links"><a href="#">PDF</a><a href="#">Slides</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="teaching">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Teaching</div>
+            <h2>Courses & resources.</h2>
+          </div>
+          <p>Course pages, lecture material, syllabi, and lab resources.</p>
+        </div>
+
+        <div class="course-grid">
+          <article class="card course-card reveal">
+            <span class="course-code">EE476</span>
+            <h3>Introduction to VLSI Systems</h3>
+            <p>
+              Digital VLSI design, transistor-level foundations, timing,
+              physical design, and implementation methodology.
+            </p>
+            <div class="course-links"><a href="#">Course site →</a><a href="#">Lab manual →</a></div>
+          </article>
+
+          <article class="card course-card reveal">
+            <span class="course-code">COURSE</span>
+            <h3>Digital System Design</h3>
+            <p>
+              RTL development, verification, FPGA implementation,
+              and digital design methodology.
+            </p>
+            <div class="course-links"><a href="#">Course material →</a></div>
+          </article>
+
+          <article class="card course-card reveal">
+            <span class="course-code">COURSE</span>
+            <h3>Computer Architecture</h3>
+            <p>
+              Processor organization, pipelines, memory hierarchy,
+              performance, and modern architecture concepts.
+            </p>
+            <div class="course-links"><a href="#">Course material →</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="students">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Students</div>
+            <h2>Research supervision.</h2>
+          </div>
+          <p>Current and former researchers can be listed here with their research topics.</p>
+        </div>
+
+        <div class="people-grid">
+          <article class="card people-card reveal">
+            <h3>Graduate Researchers</h3>
+            <ul class="people-list">
+              <li><span>Student Name</span><small>Research topic</small></li>
+              <li><span>Student Name</span><small>Research topic</small></li>
+              <li><span>Student Name</span><small>Research topic</small></li>
+            </ul>
+          </article>
+
+          <article class="card people-card reveal">
+            <h3>Undergraduate Researchers</h3>
+            <ul class="people-list">
+              <li><span>Student Name</span><small>Research topic</small></li>
+              <li><span>Student Name</span><small>Research topic</small></li>
+              <li><span>Student Name</span><small>Research topic</small></li>
+            </ul>
+          </article>
+
+          <article class="card people-card reveal">
+            <h3>Alumni</h3>
+            <ul class="people-list">
+              <li><span>Student Name</span><small>Previous project</small></li>
+              <li><span>Student Name</span><small>Previous project</small></li>
+              <li><span>Student Name</span><small>Previous project</small></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="opportunity reveal">
+          <div>
+            <h3>Interested in working with me?</h3>
+            <p>
+              Motivated undergraduate and graduate students interested in computer architecture,
+              RISC-V, digital systems, VLSI, FPGA design, or AI accelerators are encouraged to get in touch.
+              Please include your CV, transcript, research interests, and a short explanation of fit.
+            </p>
+          </div>
+          <a class="btn primary" href="mailto:rehan.naeem@uet.edu.pk">Contact me →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="for-students" aria-labelledby="for-students-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Student Resources</div>
+            <h2 id="for-students-title">For Students</h2>
+          </div>
+          <p>Useful links for research, reading papers, presentations, and planning digital system design projects.</p>
+        </div>
+        <p class="student-resource-category">Research Guides and Tools</p>
+        <div class="student-resource-grid">
+          <a class="card student-resource-card reveal" href="https://uetpk-my.sharepoint.com/:f:/g/personal/rehan_naeem_uet_edu_pk/IgDmBWStkzqvSqwW5CsmKpi6Ad3XMaMG5YsPQZm3EdyDEp0?e=28698S" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">01</span>
+            <div class="resource-content">
+              <h3>Computer Architecture Research Guide</h3>
+              <p class="resource-description">Research tips and guidance for students working in computer architecture.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+
+          <a class="card student-resource-card reveal" href="https://uetpk-my.sharepoint.com/:f:/g/personal/rehan_naeem_uet_edu_pk/IgBQhVreidTAQ5rn8ZwvWugjAS1L6rtMMh4N9eZ3dqiSe74?e=khthPh" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">02</span>
+            <div class="resource-content">
+              <h3>Reading and Understanding Research Papers</h3>
+              <p class="resource-description">Guidance on reading research papers and understanding their main ideas and contributions.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+
+          <a class="card student-resource-card reveal" href="https://uetpk-my.sharepoint.com/:b:/g/personal/rehan_naeem_uet_edu_pk/IQCIoP6tZVd4RL9p-wbHa-1FASSi8b5pytBlmF1qSX5jy70?e=xrbRlU" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">03</span>
+            <div class="resource-content">
+              <h3>Effective Research Presentations</h3>
+              <p class="resource-description">Guidance on preparing clear, well-structured presentations of research and project work.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+
+          <a class="card student-resource-card reveal" href="https://uetpk-my.sharepoint.com/:x:/g/personal/rehan_naeem_uet_edu_pk/IQAfKD6XcCuVRJyizmh1JRSFAUIC9GVYuXEnmG8aiDI57cA?e=MHqAQc" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">04</span>
+            <div class="resource-content">
+              <h3>Required Courses for Digital System Design</h3>
+              <p class="resource-description">A list of required courses to help students prepare for digital system design.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+
+          <a class="card student-resource-card reveal" href="https://github.com/toddmaustin/research-prompts/tree/main" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">05</span>
+            <div class="resource-content">
+              <h3>AI Research Prompts — Todd Austin</h3>
+              <p class="resource-description">A collection of AI prompts for research tasks, shared by Todd Austin.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+
+          <a class="card student-resource-card reveal" href="https://uetpk-my.sharepoint.com/:t:/g/personal/rehan_naeem_uet_edu_pk/IQALSJiZ7_74RbAxlswYi6-4AekBtCiuubuykZ4XpDJ-fpo?e=ujRwnU" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">06</span>
+            <div class="resource-content">
+              <h3>AI-Assisted Research Paper Analysis</h3>
+              <p class="resource-description">An AI prompt for analysing research papers and identifying their main ideas and contributions.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+
+          <a class="card student-resource-card reveal" href="https://uetpk-my.sharepoint.com/:w:/g/personal/rehan_naeem_uet_edu_pk/IQDiSXi61VnGRaHtT0pF_tPHAd7oEqa1pxF-mMcnTSuA8mA?e=FwjSNy" target="_blank" rel="noopener noreferrer">
+            <span class="mini-index" aria-hidden="true">07</span>
+            <div class="resource-content">
+              <h3>Project Synopsis and Planning Guide</h3>
+              <p class="resource-description">A guide to preparing a project synopsis and organising the work before starting implementation.</p>
+            </div>
+            <span class="resource-arrow" aria-hidden="true">↗</span>
+            <span class="resource-accessibility"> (opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="service">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Professional Service</div>
+            <h2>Academic service.</h2>
+          </div>
+          <p>Reviewer activity, committees, mentoring, and academic contribution.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="card service-card reveal">
+            <span class="iconbox">RV</span>
+            <h3>Reviewing</h3>
+            <p>Conference, journal, research proposal, and academic review activities.</p>
+          </article>
+          <article class="card service-card reveal">
+            <span class="iconbox">CM</span>
+            <h3>Committees</h3>
+            <p>Departmental, university, technical, and professional committee service.</p>
+          </article>
+          <article class="card service-card reveal">
+            <span class="iconbox">MT</span>
+            <h3>Mentoring</h3>
+            <p>Undergraduate projects, graduate research, internships, and technical training.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">News</div>
+            <h2>Recent updates.</h2>
+          </div>
+          <p>Short academic updates can keep the homepage current without making it feel like a blog.</p>
+        </div>
+
+        <div class="news-list">
+          <article class="news reveal">
+            <time>2026</time>
+            <div><h3>Research / teaching update</h3><p>Add a publication, grant, course, award, or lab update here.</p></div>
+          </article>
+          <article class="news reveal">
+            <time>2026</time>
+            <div><h3>Student or lab achievement</h3><p>Add a student milestone, internship activity, or research result here.</p></div>
+          </article>
+          <article class="news reveal">
+            <time>2026</time>
+            <div><h3>New project / opportunity</h3><p>Add a new research direction or research opening here.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-label">Contact</div>
+            <h2>Let’s connect.</h2>
+          </div>
+          <p>For research collaboration, student supervision, teaching, or academic enquiries.</p>
+        </div>
+
+        <div class="contact-wrap">
+          <article class="card contact-main reveal">
+            <h3>Department of Electrical Engineering</h3>
+            <p>
+              University of Engineering and Technology, Lahore
+            </p>
+            <a class="contact-mail" href="mailto:rehan.naeem@uet.edu.pk">
+              rehan.naeem@uet.edu.pk ↗
+            </a>
+          </article>
+
+          <article class="card profiles-card reveal">
+            <h3>Academic Profiles</h3>
+            <a class="profile-row" href="#"><span>Google Scholar</span><span>↗</span></a>
+            <a class="profile-row" href="#"><span>ORCID</span><span>↗</span></a>
+            <a class="profile-row" href="#"><span>GitHub</span><span>↗</span></a>
+            <a class="profile-row" href="#"><span>LinkedIn</span><span>↗</span></a>
+            <a class="profile-row" href="#"><span>HICOAR Lab</span><span>↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Rehan Naeem</span>
+      <span>Computer Architecture · Digital Systems · VLSI · AI Hardware</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileNav = document.getElementById("mobile-nav");
+
+    function setMenu(open){
+      mobileNav.classList.toggle("open", open);
+      menuBtn.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+
+    menuBtn.addEventListener("click", () => {
+      setMenu(!mobileNav.classList.contains("open"));
+    });
+
+    mobileNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => setMenu(false));
+    });
+
+    document.addEventListener("keydown", event => {
+      if(event.key === "Escape") setMenu(false);
+    });
+
+    document.addEventListener("click", event => {
+      if(
+        mobileNav.classList.contains("open") &&
+        !mobileNav.contains(event.target) &&
+        !menuBtn.contains(event.target)
+      ){
+        setMenu(false);
+      }
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
